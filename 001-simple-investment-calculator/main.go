@@ -17,7 +17,7 @@ func main() {
 	fmt.Print("Investment Years: ")
 	fmt.Scan(&years)
 
-	fmt.Print("Expected Return Rate: ")
+	outputText("Expected Return Rate: ")
 	fmt.Scan(&expectedReturnRate)
 
 
@@ -35,4 +35,8 @@ func main() {
 	fmt.Printf(`Future Value: %.2f
 Future Value (adjusted based on inflation): %.2f`, futureValue, futureRealValue)
 
+}
+
+func outputText(text string) {
+	fmt.Print(text)
 }
