@@ -29,7 +29,10 @@ func main() {
 
 	formartedFV := fmt.Sprintf("Future Value: %.2f\n", futureValue)
 	formartedRFV := fmt.Sprintf("Future Value (adjusted based on inflation): %.2f\n", futureRealValue)
+	fmt.Print(formartedFV, formartedRFV)
 
 	// fmt.Printf("Future Value: %.2f\nFuture Value (adjusted based on inflation): %.2f", futureValue, futureRealValue)
-	fmt.Print(formartedFV, formartedRFV)
+	fmt.Printf(`Future Value: %.2f
+Future Value (adjusted based on inflation): %.2f`, futureValue, futureRealValue)
+
 }
