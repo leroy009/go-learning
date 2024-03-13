@@ -1,14 +1,14 @@
 package main
 
 import (
-	"errors"
 	"fmt"
-	"os"
-	"strconv"
+
+	"leroy.africa/leroy/simple-bank/fileops"
 )
 
+const accountFile = "data.txt"
 func main () {
-	accountBlace, err := getDataFromFile()
+	accountBalance, err := fileops.GetDataFromFile(accountFile)
 	if err != nil {
 		fmt.Println("Error:")
 		fmt.Println(err)
@@ -17,14 +17,13 @@ func main () {
 
 	fmt.Println("Welcome to Leroy Bank")
 
-	for {
-		
+	for {		
 		presentOption()
 		option := getUserInput("Enter your option: ")
 		
 		switch option {
 			case 1:
-				fmt.Printf("Your account balance is %.2f \n", accountBlace)
+				fmt.Printf("Your account balance is %.2f \n", accountBalance)
 			case 2:
 				amountToDeposit := getUserInput("Enter the amount to deposit: ")
 
@@ -33,9 +32,9 @@ func main () {
 					continue
 				}
 
-				accountBlace = accountBlace + amountToDeposit
-				fmt.Printf("Your new account balance is %.2f \n", accountBlace)
-				writeDataToFile(accountBlace)
+				accountBalance = accountBalance + amountToDeposit
+				fmt.Printf("Your new account balance is %.2f \n", accountBalance)
+				fileops.WriteDataToFile(accountFile, accountBalance)
 			case 3:
 				amountToWithdraw := getUserInput("Enter the amount to withdraw: ")
 
@@ -44,14 +43,14 @@ func main () {
 					continue
 				}
 
-				if amountToWithdraw > accountBlace {
-					fmt.Printf("Invalid amount. You can't withdraw more your account balance: %.2f\n", accountBlace)
+				if amountToWithdraw > accountBalance {
+					fmt.Printf("Invalid amount. You can't withdraw more your account balance: %.2f\n", accountBalance)
 					continue
 				}
 
-				accountBlace = accountBlace - amountToWithdraw
-				fmt.Printf("Your new account balance is %.2f \n", accountBlace)
-				writeDataToFile(accountBlace)
+				accountBalance = accountBalance - amountToWithdraw
+				fmt.Printf("Your new account balance is %.2f \n", accountBalance)
+				fileops.WriteDataToFile(accountFile, accountBalance)
 			case 4:
 				fmt.Println("Goodbye!")	
 				return
@@ -111,30 +110,5 @@ func getUserInput(message string) float64 {
 	return userInput
 }
 
-const fileName = "data.txt"
 
-func writeDataToFile(value float64) {
-	dataText := fmt.Sprint(value)
-	os.WriteFile(fileName, []byte(dataText), 0644)
-}
-
-func getDataFromFile() (float64, error){
-	data, err := os.ReadFile(fileName)
-	if err != nil {
-		fmt.Printf("Error: %s\n", err)
-		//panic("Can't continue because file is not found.")
-		return 100, errors.New("file not found")
-	}
-
-	balanceString := string(data)
-	balance, err := strconv.ParseFloat(balanceString, 64)
-
-	if err != nil {
-		fmt.Printf("Error: %s\n", err)
-		// fmt.Println(err)
-		return 100, errors.New("failed to read data")
-	}
-
-	return balance, nil
-}
 
