@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 
+	"github.com/Pallinder/go-randomdata"
 	"leroy.africa/leroy/simple-bank/fileops"
 )
 
@@ -15,7 +16,8 @@ func main () {
 		fmt.Println("--------------------------------------")
 	}
 
-	fmt.Println("Welcome to Leroy Bank")
+	fmt.Println("Welcome to Leroy Bank", randomdata.FullName(25))
+	fmt.Println("Contact us at", randomdata.PhoneNumber())
 
 	for {		
 		presentOption()
