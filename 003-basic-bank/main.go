@@ -1,13 +1,20 @@
 package main
 
 import (
+	"errors"
 	"fmt"
 	"os"
 	"strconv"
 )
 
 func main () {
-	var accountBlace float64 = getDataFromFile()
+	accountBlace, err := getDataFromFile()
+	if err != nil {
+		fmt.Println("Error:")
+		fmt.Println(err)
+		fmt.Println("--------------------------------------")
+	}
+
 	fmt.Println("Welcome to Leroy Bank")
 
 	for {
@@ -115,15 +122,23 @@ func writeDataToFile(value float64) {
 	os.WriteFile(fileName, []byte(dataText), 0644)
 }
 
-func getDataFromFile() float64{
+func getDataFromFile() (float64, error){
 	data, err := os.ReadFile(fileName)
 	if err != nil {
-		fmt.Printf("Error:\t%v\n", err)
+		fmt.Printf("Error: %s\n", err)
+		panic("Can't continue because file is not found.")
+		return 100, errors.New("file not found")
 	}
 
 	balanceString := string(data)
-	balance, _ := strconv.ParseFloat(balanceString, 64)
+	balance, err := strconv.ParseFloat(balanceString, 64)
 
-	return balance
+	if err != nil {
+		fmt.Printf("Error: %s\n", err)
+		// fmt.Println(err)
+		return 100, errors.New("failed to read data")
+	}
+
+	return balance, nil
 }
 
