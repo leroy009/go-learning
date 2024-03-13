@@ -18,12 +18,8 @@ func main () {
 	fmt.Println("Welcome to Leroy Bank")
 
 	for {
-		fmt.Println("What would you like to do today?")
-		fmt.Println("1. Check your balance")
-		fmt.Println("2. Deposit money")
-		fmt.Println("3. Withdraw money")
-		fmt.Println("4. Exit")
-
+		
+		presentOption()
 		option := getUserInput("Enter your option: ")
 		
 		switch option {
@@ -126,7 +122,7 @@ func getDataFromFile() (float64, error){
 	data, err := os.ReadFile(fileName)
 	if err != nil {
 		fmt.Printf("Error: %s\n", err)
-		panic("Can't continue because file is not found.")
+		//panic("Can't continue because file is not found.")
 		return 100, errors.New("file not found")
 	}
 
