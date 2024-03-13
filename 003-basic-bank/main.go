@@ -3,10 +3,11 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 )
 
 func main () {
-	var accountBlace float64 = 1500
+	var accountBlace float64 = getDataFromFile()
 	fmt.Println("Welcome to Leroy Bank")
 
 	for {
@@ -107,8 +108,22 @@ func getUserInput(message string) float64 {
 	return userInput
 }
 
+const fileName = "data.txt"
+
 func writeDataToFile(value float64) {
 	dataText := fmt.Sprint(value)
-	os.WriteFile("data.txt", []byte(dataText), 0644)
+	os.WriteFile(fileName, []byte(dataText), 0644)
+}
+
+func getDataFromFile() float64{
+	data, err := os.ReadFile(fileName)
+	if err != nil {
+		fmt.Printf("Error:\t%v\n", err)
+	}
+
+	balanceString := string(data)
+	balance, _ := strconv.ParseFloat(balanceString, 64)
+
+	return balance
 }
 
