@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
 func main () {
 	var accountBlace float64 = 1500
@@ -14,8 +17,45 @@ func main () {
 		fmt.Println("4. Exit")
 
 		option := getUserInput("Enter your option: ")
+		
+		switch option {
+			case 1:
+				fmt.Printf("Your account balance is %.2f \n", accountBlace)
+			case 2:
+				amountToDeposit := getUserInput("Enter the amount to deposit: ")
 
+				if amountToDeposit <= 0 {
+					fmt.Println("Invalid amount")
+					continue
+				}
 
+				accountBlace = accountBlace + amountToDeposit
+				fmt.Printf("Your new account balance is %.2f \n", accountBlace)
+				writeDataToFile(accountBlace)
+			case 3:
+				amountToWithdraw := getUserInput("Enter the amount to withdraw: ")
+
+				if amountToWithdraw <= 0 {
+					fmt.Println("Invalid amount")
+					continue
+				}
+
+				if amountToWithdraw > accountBlace {
+					fmt.Printf("Invalid amount. You can't withdraw more your account balance: %.2f\n", accountBlace)
+					continue
+				}
+
+				accountBlace = accountBlace - amountToWithdraw
+				fmt.Printf("Your new account balance is %.2f \n", accountBlace)
+				writeDataToFile(accountBlace)
+			case 4:
+				fmt.Println("Goodbye!")	
+				return
+				fmt.Println("Thank you for using this good bank")
+			default:
+				continue
+		}
+		/*
 		if option == 1 {
 			fmt.Printf("Your account balance is %.2f \n", accountBlace)
 		} else if option == 2 {
@@ -48,6 +88,7 @@ func main () {
 			break
 		}
 		fmt.Printf("Your option: %v", option)
+		*/
 	} 
 
 	fmt.Println("Thank you for using this good bank")
@@ -64,5 +105,10 @@ func getUserInput(message string) float64 {
 	}
 
 	return userInput
+}
+
+func writeDataToFile(value float64) {
+	dataText := fmt.Sprint(value)
+	os.WriteFile("data.txt", []byte(dataText), 0644)
 }
 
