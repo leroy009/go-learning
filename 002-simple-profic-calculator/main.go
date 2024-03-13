@@ -1,7 +1,9 @@
 package main
 
 import (
+	"errors"
 	"fmt"
+	"os"
 )
 
 func main() {
@@ -20,7 +22,13 @@ func main() {
 	// fmt.Print("Input your Tax Rate: ")
 	// fmt.Scan(&taxRate)
 	// getUserInput("Input your Tax Rate", &taxRate)
-	taxRate:= getuserInputProper("Input your Tax Rate :")
+	taxRate, err := getuserInputProper("Input your Tax Rate :")
+	
+	if err != nil {
+		// fmt.Println(err)
+		// return
+		panic(err)
+	}
 
 	// ebt := revenue - expenses
 	// profit := ebt * (1- (taxRate/100))
@@ -31,6 +39,8 @@ func main() {
 	fmt.Println("Earnings after Tax: ", profit)
 	fmt.Println("Ratio: ", ratio)
 
+	writeProfitDataIntoFile(ebt, profit, ratio)
+
 	fmt.Printf("Earnings before Tax: %.2f \nEarnings after Tax: %.2f \nRatio: %.3f", ebt, profit, ratio)
 }
 
@@ -39,12 +49,16 @@ func getUserInputErrorProne(message string, value *float64) {
 	fmt.Scan(value)
 }
 
-func getuserInputProper(message string) float64 {
+func getuserInputProper(message string) (float64, error) {
 	var userInput float64
 	fmt.Print(message)
 	fmt.Scan(&userInput)
 
-	return userInput
+	if userInput <= 0 {
+		return 0, errors.New("value must ne a positive number")
+	}
+
+	return userInput, nil
 }
 
 func getUserInput(message string, value *float64) {
@@ -54,6 +68,11 @@ func getUserInput(message string, value *float64) {
     fmt.Println("Error: Invalid input. Please enter a number.")
     getUserInput(message, value) // Recursively call the function to get valid input
   }
+  	if *value <= 0 {
+		fmt.Println("Value cannot be '0' or a negative number")
+		getUserInput(message, value) // Recursively call the function to get valid input
+		return // Ensure we don't continue execution after getting the correct input
+	}
 }
 
 func calcualteProfits(revenue, expense, taxRate float64) (ebt, profit, ratio float64 ) {
@@ -62,4 +81,9 @@ func calcualteProfits(revenue, expense, taxRate float64) (ebt, profit, ratio flo
 	ratio = ebt/profit	
 
 	return ebt, profit, ratio
+}
+
+func writeProfitDataIntoFile(ebt, profit, ratio float64) {
+	data := fmt.Sprintf("EBT: %.2f\nProfit: %.2f\nRation: %.2f", ebt, profit, ratio)
+	os.WriteFile("profit.txt", []byte(data), 0644)
 }
