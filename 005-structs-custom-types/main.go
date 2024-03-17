@@ -14,8 +14,8 @@ func main() {
 	userBirthdate := getUserData("Please enter your birthdate (MM/DD/YYYY): ")
 
 	var theUser *user.User	
-	theUser, err := user.NewUser("Leroy", "Royal", "01/01/2002")
-	anotherUser, err := user.NewUser(userFirstName, userLastName, userBirthdate)
+	theUser, err := user.New("Leroy", "Royal", "01/01/2002")
+	anotherUser, err := user.New(userFirstName, userLastName, userBirthdate)
 
 	if err != nil {
 		fmt.Println("Error:", err)
