@@ -17,6 +17,8 @@ func main() {
 	theUser, err := user.New("Leroy", "Royal", "01/01/2002")
 	anotherUser, err := user.New(userFirstName, userLastName, userBirthdate)
 
+	admin, err := user.NewAdmin("Leroy", "leroy@leroy.com", "the password")
+
 	if err != nil {
 		fmt.Println("Error:", err)
 		return
@@ -28,6 +30,7 @@ func main() {
 	anotherUser.ClearUsername()
 	anotherUser.OutputUserData()
 	theUser.OutputUserData()
+	admin.OutputUserData()
 
 }
 
