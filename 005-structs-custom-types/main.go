@@ -12,6 +12,11 @@ type User struct {
 	createdAt time.Time
 }
 
+func (u User) outputUserData() {
+	fmt.Println(u.firstName, u.lastName, u.birthDate)
+}
+
+
 func main() {
 	userFirstName := getUserData("Please enter your first name: ")
 	userLastName := getUserData("Please enter your last name: ")
@@ -32,14 +37,11 @@ func main() {
 		createdAt : time.Now(),
 	}
 
-	outputUserData(&theUser)
-	outputUserData(&anotherUser)
+	theUser.outputUserData()
+	anotherUser.outputUserData()
 
 }
 
-func outputUserData(u *User) {
-	fmt.Println(u.firstName, u.lastName, u.birthDate)
-}
 
 
 func getUserData(promptText string) string {
