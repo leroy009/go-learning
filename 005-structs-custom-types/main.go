@@ -32,12 +32,12 @@ func main() {
 		createdAt : time.Now(),
 	}
 
-	outputUserData(theUser)
-	outputUserData(anotherUser)
+	outputUserData(&theUser)
+	outputUserData(&anotherUser)
 
 }
 
-func outputUserData(u User) {
+func outputUserData(u *User) {
 	fmt.Println(u.firstName, u.lastName, u.birthDate)
 }
 
