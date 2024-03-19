@@ -15,12 +15,14 @@ func main() {
 		return 
 	}
 
-	newNote, err : = note.New(title, content)
+	newNote, err := note.New(title, content)
 
 	if (err != nil) {
 		fmt.Println(err)
 		return 
 	}
+
+	newNote.Display()
 	
 }
 
