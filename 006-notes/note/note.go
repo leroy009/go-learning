@@ -24,5 +24,5 @@ func New(title, content string) (Note, error) {
 }
 
 func (note Note) Display() {
-	fmt.Printf("Note title: %v\n content: \n\n%v", note.title, note.content)
+	fmt.Printf("Note title: %v\nContent: \n\n%v", note.title, note.content)
 }
