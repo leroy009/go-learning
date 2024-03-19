@@ -54,6 +54,7 @@ func main() {
 	}	
 
 	newNote, err := note.New(title, content)
+	printAnything(newNote)
 	
 	if (err != nil) {
 		fmt.Println(err)
