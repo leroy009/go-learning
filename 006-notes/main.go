@@ -95,6 +95,26 @@ func printAnything(value interface{}) {
 		fmt.Println("Unknown type")
 	}
 
+	typedValue, ok := value.(string)
+	if ok {
+		fmt.Println("String: ", typedValue)
+	}
+
+	intValue, ok := value.(int)
+	if ok {
+		fmt.Println("Int: ", intValue)
+	}
+
+	floatValue, ok := value.(float64)
+	if ok {
+		fmt.Println("Float: ", floatValue)
+	}
+
+	boolValue, ok := value.(bool)
+	if ok {
+		fmt.Println("Boolean: ", boolValue)
+	}
+
 	// fmt.Println(value)
 }
 
