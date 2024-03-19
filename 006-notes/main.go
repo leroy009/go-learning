@@ -26,6 +26,16 @@ func main() {
 	}
 
 	newNote.Display()
+
+	err = newNote.Save()
+
+	if (err != nil) {
+		fmt.Printf("Error saving nore: %v\n",err)
+		return 
+	}
+
+	fmt.Println("Note saved successfully")
+
 	
 }
 
