@@ -31,6 +31,12 @@ type outputtable interface {
 // }
 
 func main() {
+
+	printAnything(1)
+	printAnything("hello")
+	printAnything(true)
+
+
 	title, content, err := getNoteData()
 	
 	if (err != nil) {
@@ -69,6 +75,10 @@ func main() {
 		fmt.Println(err)
 		return 
 	}
+}
+
+func printAnything(value interface{}) {
+	fmt.Println(value)
 }
 
 func outputData(data outputtable) error {
