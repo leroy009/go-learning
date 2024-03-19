@@ -35,6 +35,9 @@ func main() {
 	printAnything(1)
 	printAnything("hello")
 	printAnything(true)
+	printAnything(3.14)
+	printAnything(nil)
+	printAnything([]int{1, 2, 3, 4, 5})
 
 
 	title, content, err := getNoteData()
@@ -78,7 +81,20 @@ func main() {
 }
 
 func printAnything(value interface{}) {
-	fmt.Println(value)
+	switch value.(type) {
+	case int:
+		fmt.Println("Interger: ", value)
+	case string:
+		fmt.Println("String: ", value)
+	case bool:
+		fmt.Println("Boolean: ", value)
+	case float64:
+		fmt.Println("Float: ", value)
+	default:
+		fmt.Println("Unknown type")
+	}
+
+	// fmt.Println(value)
 }
 
 func outputData(data outputtable) error {
