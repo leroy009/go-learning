@@ -6,6 +6,11 @@ import (
 	"leroy.africa/leroy/structs-custom-types/user"
 )
 
+type str string
+
+func (text str) log() {
+	fmt.Println(text)
+}
 
 
 func main() {
@@ -32,6 +37,10 @@ func main() {
 	theUser.OutputUserData()
 	admin.OutputUserData()
 
+
+
+	var name str = "Smith"
+	name.log()
 }
 
 
