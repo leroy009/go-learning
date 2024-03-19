@@ -11,6 +11,10 @@ import (
 	"leroy.africa/leroy/notes/todo"
 )
 
+type saver interface {
+	Save() error
+}
+
 func main() {
 	title, content, err := getNoteData()
 	
