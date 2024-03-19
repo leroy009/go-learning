@@ -8,24 +8,40 @@ import (
 	"strings"
 
 	"leroy.africa/leroy/notes/note"
+	"leroy.africa/leroy/notes/todo"
 )
 
 func main() {
 	title, content, err := getNoteData()
-
+	
 	if (err != nil) {
 		fmt.Println(err)
 		return 
 	}
+	text, err := getTodoData()
+
+	if err != nil {
+		fmt.Println(err)
+		return 
+	}	
 
 	newNote, err := note.New(title, content)
-
+	
 	if (err != nil) {
+		fmt.Println(err)
+		return 
+	}
+	
+	newTodo, err := todo.New(text)
+
+	if err != nil {
 		fmt.Println(err)
 		return 
 	}
 
 	newNote.Display()
+
+	newTodo.Display()
 
 	err = newNote.Save()
 
@@ -34,9 +50,28 @@ func main() {
 		return 
 	}
 
+	err = newTodo.Save()
+
+	if (err != nil) {
+		fmt.Printf("Error saving todo: %v\n",err)
+		return 
+	}
+
 	fmt.Println("Note saved successfully")
 
+	fmt.Println("Todo saved successfully")
 	
+}
+
+func getTodoData() (text string, err error) {
+	text, err = getUserInput("Todo content: ")
+
+	if (err != nil) {
+		fmt.Println(err)
+		return "", err
+	}
+
+	return text, nil
 }
 
 func getNoteData() (title string, content string, err error) {
