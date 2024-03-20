@@ -9,8 +9,19 @@ type Prodcut struct {
 }
 
 func main () {
-	
+	websites := map[string]string{
+		"google": "https://www.google.com",
+		"facebook": "https://www.facebook.com",
+		"twitter": "https://www.twitter.com",
+		"amazon web services": "https://www.aws.com",
+	}
+
+	fmt.Println(websites)
 }
+
+
+
+
 
 func mainArraysSlicesAndAll() {
 	mainDynamicSlices()
