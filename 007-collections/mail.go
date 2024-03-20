@@ -19,5 +19,8 @@ func main() {
 	prodNames[3] = "Monitor"
 	fmt.Println(prodNames[3])
 
+	featuredPrices := prices[1:3]
+	fmt.Println(featuredPrices)
+
 
 }
