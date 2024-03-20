@@ -9,6 +9,18 @@ type Prodcut struct {
 }
 
 func main() {
+	prices := []float64{15.59, 12.50, 9.59, 5.99}
+	fmt.Println(prices[0])
+	fmt.Println(prices[1:2])
+
+	prices = append(prices, 5.99)
+	fmt.Println(prices)
+
+	prices = prices[1:]
+	fmt.Println(prices)
+}
+
+func slicesAndArrays() {
 	var prodNames [4]string = [4]string{"Laptop", "Mouse", "Keyboard"}
 	prices := [5]float64{15.59, 12.50, 9.59, 5.99}
 	fmt.Println(prices)
@@ -33,6 +45,4 @@ func main() {
 
 	fmt.Println(len(featuredPrices), cap(featuredPrices))
 	fmt.Println(len(highlightedPrices), cap(highlightedPrices))
-
-
 }
