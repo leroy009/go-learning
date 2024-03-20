@@ -6,6 +6,8 @@ import (
 
 type transformFn func(int) int
 
+type anotherFn func(int, []string, map[string][]int) ([]int, string)
+
 func main() {
 	fmt.Println("Hello, World!")
 
@@ -20,6 +22,24 @@ func main() {
 	// numbers := []int{1, 2, 3, 4, 5}
 	// doubledNumbers := transformNumbers(numbers, double)
 	// fmt.Println(doubledNumbers)
+
+	moreNumbers := []int{5,1,2,3}
+	transfomerFN1 := getTransformerFunction(&numbers)
+	transfomerFN2 := getTransformerFunction(&moreNumbers)
+
+	transformedNumbers := transformNumbers(&numbers, transfomerFN1)
+	moreTransformedNumbers := transformNumbers(&moreNumbers, transfomerFN2)
+
+	fmt.Println(transformedNumbers)
+	fmt.Println(moreTransformedNumbers)
+}
+
+func getTransformerFunction(numbers *[]int) transformFn {
+	if(*numbers)[0] == 1 {
+		return double
+	} else {
+		return triple
+	}
 }
 
 func transformNumbers(numbers *[]int, transform transformFn) []int {
