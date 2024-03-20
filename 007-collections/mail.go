@@ -27,6 +27,16 @@ func main() {
 	courseRatings["python"] = 4.0
 	courseRatings["java"] = 3.0
 	fmt.Println(courseRatings)
+
+	for index, value := range userNames {
+		fmt.Println("Index: ", index)
+		fmt.Println("Value: ", value)
+	}
+
+	for key, value := range courseRatings {
+		fmt.Println("Key: ", key)
+		fmt.Println("Value: ", value)
+	}
 }
 
 
