@@ -3,22 +3,17 @@ package main
 import "fmt"
 
 func main() {
-	fact := factorial(3)
-	fmt.Println(fact)
 
+	// numbers := []int{1, 2, 3, 4, 5}
+	sum := sumup(1, 2, 3, 4, 5, -6)
+	fmt.Println(sum)
 }
 
-func factorial(number int) int {
-	// result := 1 
-	// for i := 1; i <= number; i++ {
-	// 	result = result * i
-	// }
+func sumup(numbers ...int) int {
 
-	// return result
-
-	// Using recursion
-	if number == 0 {
-		return 1
+	sum := 0
+	for _, number := range numbers {
+		sum += number
 	}
-	return number * factorial(number - 1)
+	return sum
 }
