@@ -1,11 +1,10 @@
 package prices
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 
 	"leroy.africa/leroy/price-calulator/conversion"
+	"leroy.africa/leroy/price-calulator/filemanager"
 )
 
 type TaxIncludedPriceJob struct {
@@ -15,26 +14,11 @@ type TaxIncludedPriceJob struct {
 }
 
 func (job *TaxIncludedPriceJob) LoadData() {
-	file, err :=os.Open("prices.txt")
+
+	lines, err := filemanager.ReadLines("prices.txt")
 
 	if err != nil {
-		fmt.Println("Could not open file!")
 		fmt.Printf("Error: %s\n", err)
-		return
-	}
-
-	var lines []string
-
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		lines = append(lines, scanner.Text())
-	}
-
-	err = scanner.Err()
-	if err != nil {
-		fmt.Println("Reading the file contents failed!")
-		fmt.Printf("Error: %s\n", err)
-		file.Close()
 		return
 	}
 
@@ -43,12 +27,10 @@ func (job *TaxIncludedPriceJob) LoadData() {
 	if err != nil {
 		fmt.Println("Converting price to float failed")
 		fmt.Printf("Error: %s\n", err)
-		file.Close()
 		return
 	}
 
 	job.InputPrices = prices
-	file.Close()
 }
 
 func (job *TaxIncludedPriceJob) Process() {
