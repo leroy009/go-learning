@@ -8,8 +8,14 @@ type Prodcut struct {
 	price float64
 }
 
-func main() {
+func main () {
+	
+}
+
+func mainArraysSlicesAndAll() {
 	mainDynamicSlices()
+	mainExcercise()
+	slicesAndArrays()
 }
 
 func mainExcercise() {
