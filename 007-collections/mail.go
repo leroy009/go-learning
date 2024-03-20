@@ -17,6 +17,13 @@ func main () {
 	}
 
 	fmt.Println(websites)
+	fmt.Println(websites["amazon web services"])
+
+	websites["linkedin"] = "https://www.linkedin.com"
+	fmt.Println(websites)
+
+	delete(websites, "google")
+	fmt.Println(websites)
 }
 
 
