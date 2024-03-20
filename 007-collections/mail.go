@@ -9,6 +9,10 @@ type Prodcut struct {
 }
 
 func main() {
+	mainDynamicSlices()
+}
+
+func mainExcercise() {
 	// 1) Create a new array (!) that contains three hobbies you have
 	hobboes := []string{"Swimming", "Hunting", "Reading"}
 	// 		Output (print) that array in the command line.
@@ -61,6 +65,11 @@ func mainDynamicSlices() {
 
 	prices = prices[1:]
 	fmt.Println(prices)
+
+	discountedPrices := []float64{10.59, 11.50, 8.59, 4.99}
+	prices = append(prices, discountedPrices...)
+	fmt.Println(prices)
+
 }
 
 func slicesAndArrays() {
