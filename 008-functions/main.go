@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+type transformFn func(int) int
+
 func main() {
 	fmt.Println("Hello, World!")
 
@@ -20,7 +22,7 @@ func main() {
 	// fmt.Println(doubledNumbers)
 }
 
-func transformNumbers(numbers *[]int, transform func(int) int) []int {
+func transformNumbers(numbers *[]int, transform transformFn) []int {
 	transformedNumbers := []int{}
 
 	for _, number := range *numbers {
