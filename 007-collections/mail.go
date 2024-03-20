@@ -8,6 +8,8 @@ type Prodcut struct {
 	price float64
 }
 
+type floatMap map[string]float64
+
 func main() {
 	userNames := make([]string, 2, 5)
 
@@ -18,7 +20,8 @@ func main() {
 	userNames = append(userNames, "Bob")
 	fmt.Println(userNames)
 
-	courseRatings := make(map[string]float64, 3)
+	// courseRatings := make(map[string]float64, 3)
+	courseRatings := make(floatMap, 3)
 
 	courseRatings["go"] = 5.0
 	courseRatings["python"] = 4.0
