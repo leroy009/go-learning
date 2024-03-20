@@ -8,7 +8,19 @@ type Prodcut struct {
 	price float64
 }
 
-func main () {
+func main() {
+	userNames := make([]string, 2, 5)
+
+	userNames[0] = "Julia"
+	userNames[1] = "Michael"
+	userNames = append(userNames, "John")
+	userNames = append(userNames, "Jane")
+	userNames = append(userNames, "Bob")
+	fmt.Println(userNames)
+}
+
+
+func mainMaps () {
 	websites := map[string]string{
 		"google": "https://www.google.com",
 		"facebook": "https://www.facebook.com",
