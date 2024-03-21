@@ -11,16 +11,19 @@ func (cmd CMDmanager) ReadLines() ([]string, error) {
 
 	for {
 		var price string
-		fmt.Println("Price: ")
+		fmt.Print("Price: ")
 		fmt.Scan(&price)
 		prices = append(prices, price)
 		
-		fmt.Println("Do you want to enter another price? (y/n)")
-		var answer string
-		fmt.Scan(&answer)
-		if answer == "n" {
+		if price == "0" {
 			break
 		}
+		// fmt.Println("Do you want to enter another price? (y/n)")
+		// var answer string
+		// fmt.Scan(&answer)
+		// if answer == "n" {
+			// break
+		// }
 	}
 
 	return prices, nil
