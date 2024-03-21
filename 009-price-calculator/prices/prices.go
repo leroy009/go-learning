@@ -38,6 +38,8 @@ func (job *TaxIncludedPriceJob) LoadData() error {
 func (job *TaxIncludedPriceJob) Process(doneChan chan bool, errorChan chan error) {
 	err := job.LoadData()
 
+	// err = errors.New("Could not load data")
+
 	if err != nil {
 		// return err
 		errorChan <- err
@@ -52,7 +54,8 @@ func (job *TaxIncludedPriceJob) Process(doneChan chan bool, errorChan chan error
 	}	
 
 	job.TaxIncludedPrices = result
-	errorChan <- job.IOManager.WriteResults(job)
+	// errorChan <- job.IOManager.WriteResults(job)
+	job.IOManager.WriteResults(job)
 
 	doneChan <- true
 }

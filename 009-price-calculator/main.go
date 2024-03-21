@@ -28,11 +28,22 @@ func main() {
 		// 	fmt.Println(err)
 		// }
 	}
-	for _, errorChan := range erroChans {
-		<- errorChan
+
+	for index := range taxRates {
+		select {
+		case err := <-erroChans[index]:
+			if err != nil {
+				fmt.Println(err)
+			}
+		case <-doneChans[index]:
+			fmt.Println("Done")
+		}
 	}
+	// for _, errorChan := range erroChans {
+	// 	<- errorChan
+	// }
 	
-	for _, doneChan := range doneChans {
-		<- doneChan
-	}
+	// for _, doneChan := range doneChans {
+	// 	<- doneChan
+	// }
 }
