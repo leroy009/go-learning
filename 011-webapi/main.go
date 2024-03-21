@@ -4,13 +4,16 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"leroy.africa/leroy/webapi/models"
 )
 
 func main() {
 	server := gin.Default()
 
 	server.GET("/ping", ping)
+
 	server.GET("/events", getEvents)
+	server.POST("/events", createEvents)
 
 	server.Run(":8080")
 }
@@ -22,5 +25,22 @@ func ping(context *gin.Context) {
 }
 
 func getEvents(context *gin.Context) {
-	context.JSON(http.StatusOK, gin.H{"message": "events have started!"})
+	events := models.GetAllEvents()
+	context.JSON(http.StatusOK, events)
+}
+
+func createEvents(context *gin.Context) {
+	var event models.Event
+	err := context.BindJSON(&event)
+
+	if err != nil {
+		context.JSON(http.StatusBadRequest, gin.H{
+			"error": "Could not process request data. " + err.Error(),
+		})
+		return
+	}
+
+	event.ID = 1
+	event.UserID = 1	
+	context.JSON(http.StatusCreated, event)
 }
